@@ -1,0 +1,32 @@
+{
+  "name": "devcontainer/${localWorkspaceFolderBasename}",
+  "image": "mcr.microsoft.com/devcontainers/python:3.12",
+  "runArgs": [
+    "--env-file", ".env",
+    "--network=host"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "gerane.theme-dark-dracula",
+        "ms-python.black-formatter",
+        "charliermarsh.ruff",
+        "srmeyers.git-prefix",
+        "eamodio.gitlens",
+        "ms-toolsai.jupyter",
+        "pkief.material-icon-theme"
+      ]
+    }
+  },
+
+  // Install dependencies automatically after container creation
+  "postCreateCommand": "pip3 install --user -r requirements.txt && python -m spacy download en_core_web_sm",
+
+  // Use 'forwardPorts' to make container ports (like Flask/FastAPI) available locally
+  //"forwardPorts": [8000],
+
+  // Connect as a non-root user for better security
+  "remoteUser": "vscode"
+}
